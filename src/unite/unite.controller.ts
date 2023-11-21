@@ -19,16 +19,16 @@ export class UniteController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.uniteService.findOne(+id);
+    return this.uniteService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUniteDto: UpdateUniteDto) {
-    return this.uniteService.update(+id, updateUniteDto);
+    return this.uniteService.update(id, updateUniteDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.uniteService.remove(+id);
+    return this.uniteService.remove(id);
   }
 }

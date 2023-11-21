@@ -19,16 +19,16 @@ export class ParamController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.paramService.findOne(+id);
+    return this.paramService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateParamDto: UpdateParamDto) {
-    return this.paramService.update(+id, updateParamDto);
+    return this.paramService.update(id, updateParamDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.paramService.remove(+id);
+    return this.paramService.remove(id);
   }
 }

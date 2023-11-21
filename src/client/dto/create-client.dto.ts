@@ -1,1 +1,15 @@
-export class CreateClientDto {}
+import { IsMongoId, IsPhoneNumber, IsString } from "class-validator";
+
+export class CreateClientDto {
+    @IsString()
+    nom: string;
+
+    @IsPhoneNumber("SN")
+    tel: string;
+
+    @IsString()
+    addr: string;
+
+    @IsMongoId()
+    user: string;
+}

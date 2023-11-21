@@ -1,26 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateParamDto } from './dto/create-param.dto';
 import { UpdateParamDto } from './dto/update-param.dto';
+import { AbstractModel } from 'src/utils/abstractmodel';
+import { InjectModel } from '@nestjs/mongoose';
+import { Param, ParamDocument } from './entities/param.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
-export class ParamService {
-  create(createParamDto: CreateParamDto) {
-    return 'This action adds a new param';
-  }
-
-  findAll() {
-    return `This action returns all param`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} param`;
-  }
-
-  update(id: number, updateParamDto: UpdateParamDto) {
-    return `This action updates a #${id} param`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} param`;
-  }
+export class ParamService extends AbstractModel<Param,CreateParamDto,UpdateParamDto>{
+constructor(@InjectModel(Param.name) private readonly paramModel: Model<ParamDocument>){
+  super(paramModel);
+}
 }

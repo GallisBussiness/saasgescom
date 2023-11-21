@@ -17,9 +17,10 @@ import { VenteModule } from './vente/vente.module';
 import { FamilleModule } from './famille/famille.module';
 import { UniteModule } from './unite/unite.module';
 import { ArticleModule } from './article/article.module';
-import { FactureModule } from './facture/facture.module';
 import { PackModule } from './pack/pack.module';
 import { PaymentModule } from './payment/payment.module';
+import { FactureAchatModule } from './facture_achat/facture_achat.module';
+import { FactureVenteModule } from './facture_vente/facture_vente.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -51,9 +52,10 @@ import { PaymentModule } from './payment/payment.module';
     FamilleModule,
     UniteModule,
     ArticleModule,
-    FactureModule,
     PackModule,
     PaymentModule,
+    FactureAchatModule,
+    FactureVenteModule
   ],
   controllers: [],
   providers: [],
