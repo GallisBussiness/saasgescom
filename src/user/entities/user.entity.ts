@@ -23,6 +23,9 @@ export class User {
 
   @Prop({ type: String, default: USER_ROLE.USER })
   role: string;
+
+  @Prop({type: Number,required: true,default: 7})
+  nb_jours_restants: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

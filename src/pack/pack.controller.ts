@@ -19,16 +19,16 @@ export class PackController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.packService.findOne(+id);
+    return this.packService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePackDto: UpdatePackDto) {
-    return this.packService.update(+id, updatePackDto);
+    return this.packService.update(id, updatePackDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.packService.remove(+id);
+    return this.packService.remove(id);
   }
 }

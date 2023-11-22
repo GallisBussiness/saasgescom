@@ -7,8 +7,4 @@ export class CreateUserDto {
 
   @IsString()
   password: string;
-
-  @IsOptional()
-  @IsEnum(USER_ROLE, { each: true })
-  role: USER_ROLE;
 }
