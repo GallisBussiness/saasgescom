@@ -9,7 +9,7 @@ export class Famille {
  @Prop({type: String,required: true,unique: true})
  nom: string;
 
- @Prop({type: Types.ObjectId,ref: User.name,required: true})
+ @Prop({type: Types.ObjectId,ref:User.name,required: true})
  user: string;
 }
 

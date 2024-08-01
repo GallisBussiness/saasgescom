@@ -12,20 +12,17 @@ export type UserDocument = User & Document;
 export class User {
   _id: string;
 
+  @Prop({ type: String, required: true })
+  name: string;
+
   @Prop({ type: String, unique: true, required: true })
   login: string;
 
   @Prop({ type: String, required: true })
   password: string;
 
-  @Prop({ type: String })
-  resetPasswordToken: string;
-
   @Prop({ type: String, default: USER_ROLE.USER })
   role: string;
-
-  @Prop({type: Number,required: true,default: 7})
-  nb_jours_restants: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

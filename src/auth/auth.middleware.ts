@@ -15,6 +15,7 @@ export class AuthMiddleware implements NestMiddleware {
         const { login, role, _id } = decoded;
         req.user = { login,role, _id };
       } catch (error) {
+        console.log(error)
         throw new HttpException("Authentication failed", 440);
       }
     }

@@ -14,9 +14,9 @@ export class Fournisseur {
 
  @Prop({type: String})
  addr: string;
-
+ 
  @Prop({type: Types.ObjectId,ref: User.name,required: true})
- user: string;
+ user: string;  
 }
 
 export const FournisseurSchema = SchemaFactory.createForClass(Fournisseur);

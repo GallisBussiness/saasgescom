@@ -18,8 +18,8 @@ export class FactureVente {
     @Prop({type: Number,required: true,default:0 })
     taxe: number;
 
-    @Prop({type: Types.ObjectId,ref: User.name,required: true})
-    user: User | Types.ObjectId;
+    @Prop({type: Types.ObjectId,ref: User.name,required: true })
+    user: string;
 }
 
 export const FactureVenteSchema = SchemaFactory.createForClass(FactureVente);

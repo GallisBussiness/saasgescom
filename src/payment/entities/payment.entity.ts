@@ -13,9 +13,6 @@ export class Payment {
 
     @Prop({type: Types.ObjectId,ref: Pack.name,required: true})
     pack: Types.ObjectId;
-
-    @Prop({type: Types.ObjectId,ref: User.name,required: true})
-    user: Types.ObjectId;
 }
 
 export const PaymentSchema = SchemaFactory.createForClass(Payment);

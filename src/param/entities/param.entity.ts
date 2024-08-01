@@ -23,8 +23,13 @@ ninea: string;
 
 @Prop({type:String})
 email: string;
-@Prop({type: Types.ObjectId,ref: User.name,required: true})
-user: string | User;
+
+
+@Prop({type:String})
+tel: string;
+
+@Prop({type: Types.ObjectId,ref: User.name,required: true,autopopulate: true})
+user:string;
 }
 
 export const ParamSchema = SchemaFactory.createForClass(Param);

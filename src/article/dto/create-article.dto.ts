@@ -12,4 +12,7 @@ export class CreateArticleDto {
 
     @IsMongoId()
     unite: string;
+
+    @IsMongoId()
+    user:string;
 }

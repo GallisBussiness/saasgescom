@@ -54,7 +54,7 @@ export class UserService {
 
   async findByUsername(username: string): Promise<User> {
     try {
-      return await this.userModel.findOne({ email: username });
+      return await this.userModel.findOne({ login: username });
     } catch (error) {
       throw new HttpException(error.message, 500);
     }

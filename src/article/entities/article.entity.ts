@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument, Types } from "mongoose";
 import { Famille } from "src/famille/entities/famille.entity";
 import { Unite } from "src/unite/entities/unite.entity";
+import { User } from "src/user/entities/user.entity";
 
 export type ArticleDocument = HydratedDocument<Article>;
 
@@ -21,6 +22,9 @@ export class Article {
 
     @Prop({type:Types.ObjectId,ref:Unite.name,required: true})
     unite: string;
+
+    @Prop({type:Types.ObjectId,ref:User.name,required: true})
+    user: string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);
