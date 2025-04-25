@@ -5,13 +5,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Param, ParamSchema } from './entities/param.entity';
 import { diskStorage } from 'multer';
 import { MulterModule } from '@nestjs/platform-express';
+import { v4 as uuidv4 } from 'uuid';
 
 const storage = diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads');
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const uniqueSuffix = uuidv4();
     cb(
       null,
       file.fieldname + '-' + uniqueSuffix + '-' + file.originalname,
@@ -20,7 +21,11 @@ const storage = diskStorage({
 });
 
 @Module({
-  imports: [MongooseModule.forFeature([{name: Param.name,schema: ParamSchema}]),
+  imports: [MongooseModule.forFeatureAsync([{name: Param.name,useFactory:() => {
+    const schema =  ParamSchema;
+    schema.plugin(require('mongoose-autopopulate'));
+    return schema;
+  }}]),
   MulterModule.register({
     storage
   })

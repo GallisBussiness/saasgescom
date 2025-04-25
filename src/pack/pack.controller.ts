@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PackService } from './pack.service';
 import { CreatePackDto } from './dto/create-pack.dto';
-import { UpdatePackDto } from './dto/update-pack.dto';
+
 
 @Controller('pack')
 export class PackController {
@@ -17,18 +17,14 @@ export class PackController {
     return this.packService.findAll();
   }
 
+  @Get('user/:userId')
+  findByUser(@Param('userId') userId: string) {
+    return this.packService.findByUserId(userId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.packService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePackDto: UpdatePackDto) {
-    return this.packService.update(id, updatePackDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.packService.remove(id);
-  }
 }

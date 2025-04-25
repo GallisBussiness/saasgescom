@@ -1,26 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateVenteDto } from './dto/create-vente.dto';
 import { UpdateVenteDto } from './dto/update-vente.dto';
+import { AbstractModel } from 'src/utils/abstractmodel';
+import { Vente, VenteDocument } from './entities/vente.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
-export class VenteService {
-  create(createVenteDto: CreateVenteDto) {
-    return 'This action adds a new vente';
+export class VenteService extends AbstractModel<Vente,CreateVenteDto,UpdateVenteDto>{
+  constructor(@InjectModel(Vente.name) private readonly venteModel: Model<VenteDocument>){
+    super(venteModel)
+  }
+  async findByClient(client: string): Promise<Vente[]> {
+    try {
+      return await this.venteModel.find({client})
+    } catch (error) {
+      throw new HttpException(error.message,500);
+    }
   }
 
-  findAll() {
-    return `This action returns all vente`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} vente`;
-  }
-
-  update(id: number, updateVenteDto: UpdateVenteDto) {
-    return `This action updates a #${id} vente`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} vente`;
+  async findLastByUserId(userId: string): Promise<Vente> {
+    try {
+      return await this.venteModel.findOne({ userId }).sort({ createdAt: -1 }).limit(1);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 }

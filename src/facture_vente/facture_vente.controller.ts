@@ -12,9 +12,14 @@ export class FactureVenteController {
     return this.factureVenteService.create(createFactureVenteDto);
   }
 
-  @Get()
-  findAll() {
-    return this.factureVenteService.findAll();
+  @Get('user/:userId')
+  findAll(@Param('userId') userId: string) {
+    return this.factureVenteService.findByUserId(userId);
+  }
+
+  @Get('getbyvente/:id')
+  findByVente(@Param('id') id: string) {
+    return this.factureVenteService.findByVente(id);
   }
 
   @Get(':id')

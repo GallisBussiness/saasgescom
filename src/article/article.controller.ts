@@ -12,14 +12,20 @@ export class ArticleController {
     return this.articleService.create(createArticleDto);
   }
 
-  @Get()
-  findAll() {
-    return this.articleService.findAll();
+
+  @Get('user/:userId')
+  findByUser(@Param('userId') userId: string) {
+    return this.articleService.findByUserId(userId);
+  }
+
+  @Get('byref/:ref')
+  findOneByRef(@Param('ref') ref: string) {
+    return this.articleService.findOneByRef(decodeURIComponent(ref));
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.articleService.findOne(id);
+    return  this.articleService.findOne(id);
   }
 
   @Patch(':id')

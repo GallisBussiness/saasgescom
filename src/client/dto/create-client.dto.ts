@@ -14,5 +14,5 @@ export class CreateClientDto {
     addr: string;
 
     @IsMongoId()
-    user: string;
+    userId: string;
 }

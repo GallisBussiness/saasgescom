@@ -12,14 +12,19 @@ export class FournisseurController {
     return this.fournisseurService.create(createFournisseurDto);
   }
 
-  @Get()
-  findAll() {
-    return this.fournisseurService.findAll();
+  @Get('user/:userId')
+  findAll(@Param('userId') userId: string) {
+    return this.fournisseurService.findByUserId(userId);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.fournisseurService.findOne(id);
+  }
+
+  @Get('user/:userId')
+  findByUser(@Param('userId') userId: string) {
+    return this.fournisseurService.findByUserId(userId);
   }
 
   @Patch(':id')

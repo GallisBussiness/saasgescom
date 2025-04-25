@@ -7,21 +7,32 @@ import { HttpExceptionFilter } from './utils/http-filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { toNodeHandler } from 'better-auth/node';
+import { auth } from 'lib/auth';
+// import { AuthGuard } from './utils/auth.guard';
 
 const logger = new Logger('Main');
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useStaticAssets(join(__dirname, '..', 'uploads'), {
+  const uploadsPath = join(process.cwd(), 'uploads');
+  app.useStaticAssets(uploadsPath, {
     prefix: '/uploads/',
     setHeaders: (res, path, stat) => {
-      res.set('Access-Control-Allow-Origin', '*');
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
+      res.set('Access-Control-Allow-Origin', 'https://passionate-wonder-production-b84c.up.railway.app');
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization,Credentials");
     }
   });
   app.use(helmet());
   app.enableCors({
-    origin: '*'
+    origin: "https://passionate-wonder-production-b84c.up.railway.app", // Replace with your frontend's origin
+    methods: ["*"], // Specify allowed HTTP methods
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
   });
+  // app.useGlobalGuards(new AuthGuard());
+  const expressApp = app.getHttpAdapter().getInstance();
+  // Mount BetterAuth handler directly on Express
+  expressApp.all('/api/auth/*', toNodeHandler(auth));
+  // app.useBodyParser('json');
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

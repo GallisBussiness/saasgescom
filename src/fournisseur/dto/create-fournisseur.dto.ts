@@ -9,7 +9,7 @@ export class CreateFournisseurDto {
 
     @IsString()
     addr: string;
-
+    
     @IsMongoId()
-    user: string;
+    userId: string;
 }

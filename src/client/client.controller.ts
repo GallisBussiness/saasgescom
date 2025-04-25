@@ -12,9 +12,9 @@ export class ClientController {
     return this.clientService.create(createClientDto);
   }
 
-  @Get()
-  findAll() {
-    return this.clientService.findAll();
+  @Get('user/:userId')
+  findByUser(@Param('userId') userId: string) {
+    return this.clientService.findByUserId(userId);
   }
 
   @Get(':id')

@@ -1,26 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAchatDto } from './dto/create-achat.dto';
 import { UpdateAchatDto } from './dto/update-achat.dto';
+import { AbstractModel } from 'src/utils/abstractmodel';
+import { Achat, AchatDocument } from './entities/achat.entity';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
-export class AchatService {
-  create(createAchatDto: CreateAchatDto) {
-    return 'This action adds a new achat';
+export class AchatService extends AbstractModel<Achat,CreateAchatDto,UpdateAchatDto>{
+  constructor(@InjectModel(Achat.name) private readonly venteModel: Model<AchatDocument>){
+    super(venteModel)
   }
 
-  findAll() {
-    return `This action returns all achat`;
+  async findLastByUserId(userId: string): Promise<Achat | null> {
+    return this.venteModel.findOne({ userId }).sort({ ref: -1 }).limit(1);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} achat`;
+  async findByFournisseur(id: string) : Promise<Achat[]> {
+    return this.venteModel.find({fournisseur: id}).exec();
   }
 
-  update(id: number, updateAchatDto: UpdateAchatDto) {
-    return `This action updates a #${id} achat`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} achat`;
+  async findByDepot(id: string) : Promise<Achat[]> {
+    return this.venteModel.find({depot: id}).exec();
   }
 }

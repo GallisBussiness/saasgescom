@@ -12,9 +12,9 @@ export class UniteController {
     return this.uniteService.create(createUniteDto);
   }
 
-  @Get()
-  findAll() {
-    return this.uniteService.findAll();
+  @Get('user/:userId')
+  findByUser(@Param('userId') userId: string) {
+    return this.uniteService.findByUserId(userId);
   }
 
   @Get(':id')

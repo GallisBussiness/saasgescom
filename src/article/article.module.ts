@@ -5,8 +5,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Article, ArticleSchema } from './entities/article.entity';
 
 @Module({
-  imports:[MongooseModule.forFeature([{name: Article.name,schema: ArticleSchema}])],
+  imports:[MongooseModule.forFeatureAsync([{name: Article.name, useFactory:() => {
+    const schema = ArticleSchema;
+    schema.plugin(require('mongoose-autopopulate'));
+    return schema;
+  }}])],
   controllers: [ArticleController],
   providers: [ArticleService],
+  exports:[ArticleService]
 })
 export class ArticleModule {}

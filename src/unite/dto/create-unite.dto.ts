@@ -5,5 +5,5 @@ export class CreateUniteDto {
     nom: string;
 
     @IsMongoId()
-    user: string;
+    userId: string;
 }

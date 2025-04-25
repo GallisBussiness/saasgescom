@@ -5,5 +5,5 @@ export class CreateFamilleDto {
     nom: string;
 
     @IsMongoId()
-    user: string;
+    userId: string;
 }

@@ -17,20 +17,27 @@ export class AbstractModel<T,C,U> {
     
       async findAll(): Promise<T[]> {
         try {
-          return await this.model.find().sort({ createdAt: -1 });
+          return await this.model.find({},{password:0}).sort({ createdAt: -1 });
         } catch (error) {
           throw new HttpException(error.message, 500);
         }
       }
     
-      async findOne(id: string): Promise<T> {
+        async findOne(id: string): Promise<T> {
+          try {
+            return  await this.model.findById(id,{password:0});
+          } catch (error) {
+            throw new HttpException(error.message, 500);
+          }
+        }
+      
+      async findByUserId(userId: string): Promise<T[]> {
         try {
-          return  await this.model.findById(id);
+          return await this.model.find({ userId }).sort({ createdAt: -1 });
         } catch (error) {
           throw new HttpException(error.message, 500);
         }
       }
-    
     
       async update(
         id: string,

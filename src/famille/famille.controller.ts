@@ -12,9 +12,9 @@ export class FamilleController {
     return this.familleService.create(createFamilleDto);
   }
 
-  @Get()
-  findAll() {
-    return this.familleService.findAll();
+  @Get('user/:userId')
+  findByUser(@Param('userId') userId: string) {
+    return this.familleService.findByUserId(userId);
   }
 
   @Get(':id')

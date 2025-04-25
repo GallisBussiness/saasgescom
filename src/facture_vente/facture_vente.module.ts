@@ -5,7 +5,12 @@ import { FactureVente, FactureVenteSchema } from './entities/facture_vente.entit
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports:[MongooseModule.forFeature([{name:FactureVente.name,schema: FactureVenteSchema}])],
+  imports:[MongooseModule.forFeatureAsync([{name:FactureVente.name,useFactory:() => {
+    const schema = FactureVenteSchema;
+    schema.plugin(require('mongoose-autopopulate'));
+    schema.plugin(require('mongoose-serial'),{ field:"ref",prefix:'FA',separator: ""})
+    return schema;
+  }}])],
   controllers: [FactureVenteController],
   providers: [FactureVenteService],
 })

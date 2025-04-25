@@ -2,6 +2,9 @@ import { IsMongoId, IsNumber, IsString } from "class-validator";
 
 export class CreateArticleDto {
     @IsString()
+    ref: string;
+
+    @IsString()
     nom: string;
 
     @IsNumber()
@@ -10,9 +13,12 @@ export class CreateArticleDto {
     @IsMongoId()
     famille: string;
 
-    @IsMongoId()
-    unite: string;
+    @IsNumber()
+    prix:number;
 
     @IsMongoId()
-    user:string;
+    unite: string;
+    
+    @IsMongoId()
+    userId: string;
 }

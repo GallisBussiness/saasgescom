@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument, Types } from "mongoose";
-import { User } from "src/user/entities/user.entity";
+import { Client } from "src/client/entities/client.entity";
+import { Vente } from "src/vente/entities/vente.entity";
 
 export type FactureVenteDocument = HydratedDocument<FactureVente>;
 
@@ -9,16 +10,16 @@ export class FactureVente {
     @Prop({type: String})
     ref: string;
 
-    @Prop({type: Number,required: true})
-    ht: number;
-
     @Prop({type: Date,required: true})
-    date_echeance: string;
+    date: string;
 
-    @Prop({type: Number,required: true,default:0 })
-    taxe: number;
+    @Prop({type: Types.ObjectId,ref:Client.name,required: true,autopopulate:true})
+    client: Client | string;
 
-    @Prop({type: Types.ObjectId,ref: User.name,required: true })
+    @Prop({type: Types.ObjectId,ref:Vente.name,required: true,autopopulate:true})
+    vente: Vente | string;
+
+    @Prop({type:Types.ObjectId,ref:'user',required: true})
     user: string;
 }
 

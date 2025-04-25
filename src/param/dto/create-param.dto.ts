@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsMongoId, IsNumber, IsOptional, IsPhoneNumber, IsString } from "class-validator";
+import { IsEmail, IsMongoId, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateParamDto {
     @ApiProperty({ example: 'shop', description: 'Le nom de la structure' })
@@ -25,9 +25,15 @@ export class CreateParamDto {
     @IsEmail()
     email:string;
 
-    @IsPhoneNumber('SN')
+    @IsString()
     tel:string;
 
+    @IsString()
+    addr:string;
+
+    @IsString()
+    desc:string;
+
     @IsMongoId()
-    user: string;
+    userId:string;
 }

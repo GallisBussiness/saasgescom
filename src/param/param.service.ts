@@ -12,9 +12,17 @@ constructor(@InjectModel(Param.name) private readonly paramModel: Model<ParamDoc
   super(paramModel);
 }
 
-async findByUser(id: string): Promise<Param> {
+async findOne(): Promise<Param> {
   try {
-    return await this.paramModel.findOne({user: id});
+    return await this.paramModel.findOne();
+  } catch (error) {
+    throw new HttpException(error.message,500);
+  }
+}
+
+async findByUser(userId: string): Promise<Param> {
+  try {
+    return await this.paramModel.findOne({ userId });
   } catch (error) {
     throw new HttpException(error.message,500);
   }

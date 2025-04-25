@@ -12,9 +12,9 @@ export class FactureAchatController {
     return this.factureAchatService.create(createFactureAchatDto);
   }
 
-  @Get()
-  findAll() {
-    return this.factureAchatService.findAll();
+  @Get('user/:userId')
+  findAll(@Param('userId') userId: string) {
+    return this.factureAchatService.findByUserId(userId);
   }
 
   @Get(':id')
