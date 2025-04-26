@@ -35,9 +35,9 @@ export class PaymentController {
     ref_command:payment._id,
     command_name:"Paiement gestion commercial pour " + payment.montant + " XOF",
     env:"test",
-    success_url:"https://passionate-wonder-production-b84c.up.railway.app/success",
-    cancel_url:"https://passionate-wonder-production-b84c.up.railway.app/cancel",
-    ipn_url:"https://ges-com-saas-production.up.railway.app/payment/ipn"
+    success_url:process.env.APP_URL + "/success",
+    cancel_url:process.env.APP_URL + "/cancel",
+    ipn_url:process.env.BACKEND_URL + "/payment/ipn"
     };
 
     let headers = {

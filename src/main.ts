@@ -18,13 +18,13 @@ async function bootstrap() {
   app.useStaticAssets(uploadsPath, {
     prefix: '/uploads/',
     setHeaders: (res, path, stat) => {
-      res.set('Access-Control-Allow-Origin', 'https://passionate-wonder-production-b84c.up.railway.app');
+      res.set('Access-Control-Allow-Origin', process.env.APP_URL);
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization,Credentials");
     }
   });
   app.use(helmet());
   app.enableCors({
-    origin: "https://passionate-wonder-production-b84c.up.railway.app", // Replace with your frontend's origin
+    origin: process.env.APP_URL,
     methods: ["*"], // Specify allowed HTTP methods
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
   });
