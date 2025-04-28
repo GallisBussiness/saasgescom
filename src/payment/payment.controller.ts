@@ -35,9 +35,9 @@ export class PaymentController {
     ref_command:payment._id,
     command_name:"Paiement gestion commercial pour " + payment.montant + " XOF",
     env:"test",
-    success_url:process.env.APP_URL + "/success",
-    cancel_url:process.env.APP_URL + "/cancel",
-    ipn_url:process.env.BACKEND_URL + "/payment/ipn"
+    success_url:this.config.get('APP_URL') + "/success",
+    cancel_url:this.config.get('APP_URL') + "/cancel",
+    ipn_url:this.config.get('BACKEND_URL') + "/payment/ipn"
     };
 
     let headers = {
