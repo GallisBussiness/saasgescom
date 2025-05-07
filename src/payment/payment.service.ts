@@ -111,8 +111,6 @@ export class PaymentService extends AbstractModel<Payment, CreatePaymentDto, Upd
     console.log(now);
     return await this.paymentModel.findOne({
       user: userId,
-      date_debut: { $lte: now },
-      date_fin: { $gte: now },
       statut: 'valide'
     }).populate('pack').exec();
   }
