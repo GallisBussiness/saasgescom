@@ -108,17 +108,16 @@ export class PaymentService extends AbstractModel<Payment, CreatePaymentDto, Upd
   
   async getActiveSubscription(userId: string) {
     const now = new Date();
-    console.log(now);
     return await this.paymentModel.findOne({
       user: userId,
+      date_debut: { $lte: now },
+      date_fin: { $gte: now },
       statut: 'valide'
     }).populate('pack').exec();
   }
   
   async verifySubscription(userId: string) {
-    console.log(userId);
     const activeSubscription = await this.getActiveSubscription(userId);
-    console.log(activeSubscription);
     return {
       hasActiveSubscription: !!activeSubscription,
       subscription: activeSubscription

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument, Types } from "mongoose";
+import mongoose, { HydratedDocument, Types } from "mongoose";
 import { Pack } from "src/pack/entities/pack.entity";
 
 export type PaymentDocument = HydratedDocument<Payment>;
@@ -18,10 +18,10 @@ export class Payment {
     @Prop({type: Number,required: true})
     montant: number;
     
-    @Prop({type: Date,required: true})
+    @Prop({type: mongoose.Schema.Types.Date,required: true})
     date_debut: Date;
     
-    @Prop({type: Date,required: true})
+    @Prop({type: mongoose.Schema.Types.Date,required: true})
     date_fin: Date;
     
     @Prop({type: String,enum: ['mensuel', 'trimestriel', 'semestriel'],required: true})
