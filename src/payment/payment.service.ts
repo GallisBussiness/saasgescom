@@ -108,6 +108,7 @@ export class PaymentService extends AbstractModel<Payment, CreatePaymentDto, Upd
   
   async getActiveSubscription(userId: string) {
     const now = new Date();
+    console.log(now);
     return await this.paymentModel.findOne({
       user: userId,
       date_debut: { $lte: now },
