@@ -117,6 +117,7 @@ export class PaymentService extends AbstractModel<Payment, CreatePaymentDto, Upd
   }
   
   async verifySubscription(userId: string) {
+    console.log(userId);
     const activeSubscription = await this.getActiveSubscription(userId);
     console.log(activeSubscription);
     return {
