@@ -78,6 +78,9 @@ export class PaymentController {
       if(type_event === 'sale_complete'){
         await this.paymentService.update(ref_command,{statut:'valide',methode_paiement:payment_method})
       }
+      else {
+        await this.paymentService.remove(ref_command);
+      }
     }
     else{
       console.log("from someone else");

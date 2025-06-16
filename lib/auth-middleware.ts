@@ -15,6 +15,9 @@ export class AuthMiddleware implements NestMiddleware {
         
         const session = await auth.api.getSession({
           headers:fromNodeHeaders(req.headers),
+          query:{
+            disableCookieCache:true
+          }
         })
         if(!session){
           console.log('No session found');
