@@ -26,4 +26,12 @@ export class VenteService extends AbstractModel<Vente,CreateVenteDto,UpdateVente
       throw new HttpException(error.message, 500);
     }
   }
+
+  async findAllByUser(userId: string): Promise<Vente[]> {
+    try {
+      return await this.venteModel.find({ userId }).sort({ date: 1 });
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
+  }
 }

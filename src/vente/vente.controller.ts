@@ -22,7 +22,7 @@ export class VenteController {
 
   @Get('user/:userId')
   findByUser(@Param('userId') userId: string) {
-    return this.venteService.findByUserId(userId);
+    return this.venteService.findAllByUser(userId);
   }
 
   @Get('byclient/:client')
