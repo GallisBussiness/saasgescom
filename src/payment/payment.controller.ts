@@ -34,7 +34,7 @@ export class PaymentController {
     currency:"XOF",
     ref_command:payment._id,
     command_name:"Paiement gestion commercial pour " + payment.montant + " XOF",
-    env:"test",
+    env:"prod",
     success_url:this.config.get('APP_URL') + "/success",
     cancel_url:this.config.get('APP_URL') + "/cancel",
     ipn_url:this.config.get('BACKEND_URL') + "/payment/ipn"

@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Request } from '@nestjs/common';
 import { VenteService } from './vente.service';
 import { CreateVenteDto } from './dto/create-vente.dto';
 import { UpdateVenteDto } from './dto/update-vente.dto';
 import { InvoiceNumber } from 'invoice-number';
+import { auth } from 'lib/auth';
+import { fromNodeHeaders } from 'better-auth/node';
 
 @Controller('vente')
 export class VenteController {
@@ -10,7 +12,7 @@ export class VenteController {
 
   @Post()
   async create(@Body() createVenteDto: CreateVenteDto) {
-    const ini = "100AAA000";
+    const ini = "100VVV000";
     const lastVente = await this.venteService.findLastByUserId(createVenteDto.userId);
     if(lastVente){
       createVenteDto.ref = InvoiceNumber.next(lastVente.ref);
@@ -21,7 +23,11 @@ export class VenteController {
   }
 
   @Get('user/:userId')
-  findByUser(@Param('userId') userId: string) {
+  async findByUser(@Param('userId') userId: string, @Req() req) {
+    const session = await auth.api.getSession({
+      headers: fromNodeHeaders(req.headers),
+    });
+    console.log(session);
     return this.venteService.findAllByUser(userId);
   }
 
